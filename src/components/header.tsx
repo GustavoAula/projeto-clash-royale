@@ -80,7 +80,7 @@ export function Header() {
         left="50%"
         transform="translateX(-50%)"
         zIndex={1001}
-        bg="black"
+        bg="#000000"
         h="100px"
         w={{ base: "100%", md: "768px", lg: "1024px", xl: "1200px", "2xl": "1600px" }}
       >
