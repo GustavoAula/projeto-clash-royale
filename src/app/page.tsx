@@ -1,7 +1,10 @@
+import { VStack } from "@chakra-ui/react";
+import { HeroSection } from "@/components/home/hero-section";
+
 export default function Home() {
   return (
-    <main>
-      <h1>Clash Royale</h1>
-    </main>
+    <VStack as="main" gap={0}>
+      <HeroSection />
+    </VStack>
   );
 }
