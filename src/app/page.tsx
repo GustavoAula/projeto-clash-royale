@@ -4,6 +4,7 @@ import { IntroSection } from "@/components/home/intro-section";
 import { NewsSection } from "@/components/home/news-section";
 import { SocialSection } from "@/components/home/social-section";
 import { VideoCarousel } from "@/components/home/video-carousel";
+import { CareersSection } from "@/components/home/careers-section";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <NewsSection />
       <SocialSection />
       <VideoCarousel />
+      <CareersSection />
     </VStack>
   );
 }
