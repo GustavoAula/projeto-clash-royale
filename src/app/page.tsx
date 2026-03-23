@@ -2,6 +2,7 @@ import { VStack } from "@chakra-ui/react";
 import { HeroSection } from "@/components/home/hero-section";
 import { IntroSection } from "@/components/home/intro-section";
 import { NewsSection } from "@/components/home/news-section";
+import { SocialSection } from "@/components/home/social-section";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroSection />
       <IntroSection />
       <NewsSection />
+      <SocialSection />
     </VStack>
   );
 }
