@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/home/hero-section";
 import { IntroSection } from "@/components/home/intro-section";
 import { NewsSection } from "@/components/home/news-section";
 import { SocialSection } from "@/components/home/social-section";
+import { VideoCarousel } from "@/components/home/video-carousel";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <IntroSection />
       <NewsSection />
       <SocialSection />
+      <VideoCarousel />
     </VStack>
   );
 }
