@@ -24,9 +24,9 @@ export function CareersSection() {
         <VStack align="center" gap={4}>
           <Heading
             as="h2"
-            fontSize="42px"
+            fontSize="36px"
             fontWeight="900"
-            fontFamily="mono"
+            fontFamily="'Supercell', sans-serif"
             color="white"
             textTransform="uppercase"
             letterSpacing="tighter"

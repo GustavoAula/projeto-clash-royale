@@ -33,9 +33,9 @@ export function IntroSection() {
       >
         <Heading
           as="h2"
-          fontSize="4xl"
+          fontSize="34px"
           fontWeight="black"
-          fontFamily="mono"
+          fontFamily="'Supercell', sans-serif"
           textTransform="uppercase"
           letterSpacing="tight"
           color="black"
@@ -44,7 +44,7 @@ export function IntroSection() {
           Epic Real-Time Card Battles
         </Heading>
 
-        <Text fontSize="lg" fontWeight="normal" lineHeight="tall" color="gray.1100" paddingBottom={8}>
+        <Text fontSize="lg" fontWeight="normal" lineHeight="tall" color="gray.1100" paddingBottom={8} paddingTop={3}>
           Clash Royale is a real-time multiplayer game starring the Royales, your favourite
           Clash® characters and much, much more. Collect and upgrade dozens of cards featuring
           the Clash of Clans troops, spells and defenses you know and love, as well as the

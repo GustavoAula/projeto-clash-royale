@@ -21,9 +21,9 @@ export function NewsSection() {
 
         <Heading
           as="h2"
-          fontSize="41px"
+          fontSize="34px"
           fontWeight="black"
-          fontFamily="mono"
+          fontFamily="'Supercell', sans-serif"
           textTransform="uppercase"
           letterSpacing="tight"
           textAlign="center"

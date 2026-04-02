@@ -6,3 +6,35 @@ html,
 body {
   overflow-x: hidden;
 }
+
+@font-face {
+  font-family: 'Supercell';
+  src: url('/fonts/supercellheadline-heavy.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SupercellText';
+  src: url('/fonts/supercelltext_w_md.ee96c3e1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SupercellTextBold';
+  src: url('/fonts/supercelltext_w_bd.34a799b2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SupercellTextRegular';
+  src: url('/fonts/supercelltext_w_rg.0fa6c3e2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

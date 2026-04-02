@@ -52,12 +52,12 @@ export function SocialSection() {
         <VStack align="start" gap={6} color="white">
           <Heading
             as="h2"
-            fontSize="42px"
+            fontSize="35px"
             fontWeight="900"
             textAlign="left"
             textTransform="uppercase"
-            fontFamily="mono"
             letterSpacing="tighter"
+            fontFamily="'Supercell', sans-serif"
           >
             See the latest
           </Heading>

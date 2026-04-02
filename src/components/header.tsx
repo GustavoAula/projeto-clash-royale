@@ -114,12 +114,13 @@ export function Header() {
                 <ChakraLink
                   href={item.href}
                   color={item.highlighted ? "white" : "gray.500"}
-                  fontSize="lg"
+                  fontSize="16.5px"
+                  fontFamily="SupercellTextBold"
                   fontWeight={item.highlighted ? "bold" : "medium"}
                   _hover={{ color: "white" }}
                   textDecoration="none"
                 >
-                  {item.label}
+                  {item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase()}
                 </ChakraLink>
 
                 {/* Dropdown com animação */}
@@ -149,13 +150,14 @@ export function Header() {
                       key={sub.label}
                       href={sub.href}
                       color={sub.highlight ? "white" : "gray.400"}
-                      fontSize="18px"
+                      fontSize="16.5px"
+                      fontFamily="SupercellTextBold"
                       fontWeight="medium"
                       whiteSpace="nowrap"
                       _hover={{ color: "white" }}
                       textDecoration="none"
                     >
-                      {sub.label}
+                      {sub.label.charAt(0).toUpperCase() + sub.label.slice(1).toLowerCase()}
                     </ChakraLink>
                   ))}
                 </Box>
