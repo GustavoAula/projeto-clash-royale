@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Box, Flex, Text, HStack, Link as ChakraLink, IconButton } from "@chakra-ui/react";
-import { LuChevronRight, LuChevronLeft } from "react-icons/lu";
+import { Box, Flex, Text, Link as ChakraLink, IconButton, Carousel } from "@chakra-ui/react";
+import { LuChevronRight, LuChevronLeft, LuPlay } from "react-icons/lu";
 import NextImage from "next/image";
 
 const videos = [
@@ -23,7 +22,12 @@ function VideoCard({ video }: { video: typeof videos[0] }) {
       borderColor="gray.100"
       marginTop={62}
     >
-      <ChakraLink href={video.href} target="_blank" display="block">
+      <ChakraLink
+        href={video.href}
+        target="_blank"
+        display="block"
+        _hover={{ textDecoration: "none", "& p": { color: "gray.700" } }}
+      >
         <Box position="relative">
           <NextImage
             src={video.thumb}
@@ -44,28 +48,19 @@ function VideoCard({ video }: { video: typeof videos[0] }) {
               w="170px"
               h="170px"
               borderRadius="full"
-              border="3px solid white"
+              border="5px solid white"
               display="flex"
               alignItems="center"
               justifyContent="center"
               bg="transparent"
             >
-              <Box
-                w={0}
-                h={0}
-                ml="6px"
-                style={{
-                  borderTop: "14px solid transparent",
-                  borderBottom: "14px solid transparent",
-                  borderLeft: "22px solid white",
-                }}
-              />
+              <LuPlay size={64} color="white" style={{ marginLeft: "8px", strokeWidth: "1.8px" }} />
             </Box>
           </Box>
         </Box>
 
         <Flex px={6} py={4} align="center" justify="space-between" minH="70px">
-          <Text color="blue.500" fontWeight="medium" fontSize="md" _hover={{ color: "gray.700" }}>
+          <Text color="blue.500" fontWeight="medium" fontSize="md" transition="color 0.2s">
             {video.caption}
           </Text>
           <NextImage
@@ -82,104 +77,129 @@ function VideoCard({ video }: { video: typeof videos[0] }) {
 }
 
 export function VideoCarousel() {
-  const [current, setCurrent] = useState(0);
-  const pairs = [videos.slice(0, 2), videos.slice(2, 4)];
+  const videoChunks = [];
+  for (let i = 0; i < videos.length; i += 2) {
+    videoChunks.push(videos.slice(i, i + 2));
+  }
 
   return (
     <Box w="100%" py={12} position="relative">
-      <Box maxW="1600px" mx="auto" px={6}>
+      <Box maxW="1648px" mx="auto" px={6}>
 
         <Box display={{ base: "none", md: "block" }} position="relative" overflow="visible">
-
-          <Box overflow="hidden">
-            <Box
-              display="flex"
+          
+          <Carousel.Root 
+            slidesPerPage={1} 
+            spacing="120px" 
+            slideCount={videoChunks.length}
+          >
+            <Carousel.ItemGroup 
               style={{
-                transform: `translateX(-${current * 110}%)`,
-                transition: "transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
+                transitionDuration: "0.35s",
+                transitionTimingFunction: "ease-in"
               }}
-              gap="10%"
             >
-              {pairs.map((pair, i) => (
-                <Box key={i} minW="100%" display="flex" gap={6}>
-                  {pair.map((v) => (
-                    <VideoCard key={v.caption} video={v} />
-                  ))}
-                </Box>
+              {videoChunks.map((chunk, i) => (
+                <Carousel.Item key={i} index={i}>
+                  <Flex gap="24px" w="100%">
+                    {chunk.map((v) => (
+                      <Box key={v.caption} flex="1" minW="0">
+                        <VideoCard video={v} />
+                      </Box>
+                    ))}
+                  </Flex>
+                </Carousel.Item>
               ))}
-            </Box>
-          </Box>
+            </Carousel.ItemGroup>
 
-          {/* Botão próximo */}
-          {current < pairs.length - 1 && (
-            <Box
-              position="absolute"
-              right="-178px"
-              top="50%"
-              transform="translateY(-50%)"
-              zIndex={10}
-            >
-              <IconButton
-                aria-label="Próximo"
-                bg="gray.900"
-                color="white"
-                borderRadius="full"
-                w="65px"
-                h="75px"
-                onClick={() => setCurrent(current + 1)}
-                _hover={{ bg: "gray.700" }}
-                style={{
-                  borderTopRightRadius: 0,
-                  borderBottomRightRadius: 0,
-                }}
-              >
-                <LuChevronRight style={{ width: "32px", height: "32px" }} />
-              </IconButton>
-            </Box>
-          )}
+            <Carousel.Control>
+              <Carousel.PrevTrigger asChild>
+                <Box
+                  position="absolute"
+                  left="-178px"
+                  top="50%"
+                  transform="translateY(-50%)"
+                  zIndex={10}
+                  _disabled={{ opacity: 0, pointerEvents: "none" }}
+                  transition="opacity 0.2s"
+                >
+                  <IconButton
+                    aria-label="Anterior"
+                    bg="gray.900"
+                    color="white"
+                    borderRadius="full"
+                    w="86px"
+                    h="75px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    paddingLeft="15px"
+                    _hover={{ bg: "gray.700" }}
+                    style={{
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    }}
+                  >
+                    <LuChevronLeft style={{ width: "32px", height: "32px" }} />
+                  </IconButton>
+                </Box>
+              </Carousel.PrevTrigger>
 
-          {/* Botão anterior */}
-          {current > 0 && (
-            <Box
-              position="absolute"
-              left="-178px"
-              top="50%"
-              transform="translateY(-50%)"
-              zIndex={10}
-            >
-              <IconButton
-                aria-label="Anterior"
-                bg="gray.900"
-                color="white"
-                borderRadius="full"
-                w="65px"
-                h="75px"
-                onClick={() => setCurrent(current - 1)}
-                _hover={{ bg: "gray.700" }}
-                style={{
-                  borderTopLeftRadius: 0,
-                  borderBottomLeftRadius: 0,
-                }}
-              >
-                <LuChevronLeft style={{ width: "32px", height: "32px" }} />
-              </IconButton>
-            </Box>
-          )}
+              <Carousel.NextTrigger asChild>
+                <Box
+                  position="absolute"
+                  right="-178px"
+                  top="50%"
+                  transform="translateY(-50%)"
+                  zIndex={10}
+                  _disabled={{ opacity: 0, pointerEvents: "none" }}
+                  transition="opacity 0.2s"
+                >
+                  <IconButton
+                    aria-label="Próximo"
+                    bg="gray.900"
+                    color="white"
+                    borderRadius="full"
+                    w="86px"
+                    h="75px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    paddingRight="15px"
+                    _hover={{ bg: "gray.700" }}
+                    style={{
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0,
+                    }}
+                  >
+                    <LuChevronRight style={{ width: "32px", height: "32px" }} />
+                  </IconButton>
+                </Box>
+              </Carousel.NextTrigger>
 
-          {/* Dots */}
-          <HStack justify="center" mt={6} gap={3} paddingTop={8}>
-            {pairs.map((_, i) => (
-              <Box
-                key={i}
-                w="14px"
-                h="14px"
-                borderRadius="full"
-                bg={current === i ? "blue.500" : "gray.300"}
-                cursor="pointer"
-                onClick={() => setCurrent(i)}
-              />
-            ))}
-          </HStack>
+              <Carousel.IndicatorGroup w="100%" justifyContent="center" mt={6} gap={3} paddingTop={8} display="flex">
+                {Array.from({ length: videoChunks.length }).map((_, i) => (
+                  <Carousel.Indicator
+                    key={i}
+                    index={i}
+                    w="14px"
+                    h="14px"
+                    borderRadius="full"
+                    bg="gray.300"
+                    _current={{ bg: "blue.500" }}
+                    _active={{ bg: "blue.500" }}
+                    cursor="pointer"
+                    css={{
+                      "&[data-current]": { bg: "var(--chakra-colors-blue-500)" },
+                      "&[data-selected]": { bg: "var(--chakra-colors-blue-500)" },
+                      "&[data-state=active]": { bg: "var(--chakra-colors-blue-500)" }
+                    }}
+                  />
+                ))}
+              </Carousel.IndicatorGroup>
+            </Carousel.Control>
+
+          </Carousel.Root>
         </Box>
 
       </Box>
